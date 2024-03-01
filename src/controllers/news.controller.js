@@ -28,7 +28,6 @@ const getAll = async (req, res) => {
             return res.status(400).send({ message: "There's no news registered" })
         }
 
-        console.log(limit, offset)
         res.status(200).send({
             newUrl,
             previewsUrl: previews,
