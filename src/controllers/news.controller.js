@@ -155,7 +155,7 @@ const searchByTitle = async (req, res) => {
             results: news.map(newsItem => ({
                 id: newsItem._id,
                 title: newsItem.title,
-                text: newsItem.banner,
+                text: newsItem.text,
                 banner: newsItem.banner,
                 likes: newsItem.likes,
                 comments: newsItem.comments,
@@ -239,7 +239,7 @@ const getPostByUserId = async (req, res) => {
             results: news.map(newsItem => ({
                 id: newsItem._id,
                 title: newsItem.title,
-                text: newsItem.banner,
+                text: newsItem.text,
                 banner: newsItem.banner,
                 likes: newsItem.likes,
                 comments: newsItem.comments,
