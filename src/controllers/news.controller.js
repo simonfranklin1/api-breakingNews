@@ -118,7 +118,7 @@ const topNews = async (req, res) => {
             news: {
                 id: news._id,
                 title: news.title,
-                text: news.banner,
+                text: news.text,
                 banner: news.banner,
                 likes: news.likes,
                 comments: news.comments,
