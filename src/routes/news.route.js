@@ -11,7 +11,7 @@ router.get("/search", searchByTitle);
 router.post("/create", validateAuth, create);
 
 router.use(validateAuth);
-router.get("/user", getPostByUserId);
+router.get("/user/:id", getPostByUserId);
 
 router.get("/find/:id", validateAuth, get);
 

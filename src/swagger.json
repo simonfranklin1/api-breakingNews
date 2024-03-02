@@ -395,9 +395,9 @@
                 }
             }
         },
-        "/news/user": {
+        "/news/user/{id}": {
             "get": {
-                "summary": "Search posts by use id",
+                "summary": "Search posts by user id",
                 "description": "Route responsible for fetching posts by use id",
                 "tags": [
                     "Post"
