@@ -40,6 +40,6 @@ export const validateAuth = async (req, res, next) => {
             return next();
         })
     } catch (error) {
-        res.status(500).send({ message: "Deu ruim"})
+        res.status(500).send({ message: error.message })
     }
 }
