@@ -22,7 +22,7 @@ const topNewsService = () => News.findOne().sort({ _id: -1 }).populate("user");
 
 const findPostsByUserId = (id) => {
     return News.find({
-        user: id,
+        user: id
     }).sort({ _id: -1 }).populate("user")
 };
 

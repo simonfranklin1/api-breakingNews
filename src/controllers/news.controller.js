@@ -227,7 +227,7 @@ const remove = async (req, res) => {
 
 const getPostByUserId = async (req, res) => {
     try {
-        const id = req.userId;
+        const id = req.params.id;
 
         const news = await findPostsByUserId(id);
 
