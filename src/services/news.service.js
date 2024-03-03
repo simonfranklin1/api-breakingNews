@@ -40,11 +40,11 @@ const dislikeNewService = (id, userId) => {
     )
 }
 
-const commentService = (id, userId, comment) => {
+const commentService = (id, userId, comment, avatar, username) => {
     let idComment = Math.floor(Math.floor(Date.now() * Math.random())).toString();
     return News.findOneAndUpdate(
         { _id: id },
-        { $push: { comments: { idComment, userId, comment: comment.comment, createdAt: new Date() } } }
+        { $push: { comments: { idComment, userId, comment: comment.comment, createdAt: new Date(), avatar, username } } }
     )
 }
 

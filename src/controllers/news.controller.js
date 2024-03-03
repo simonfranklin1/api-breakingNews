@@ -1,3 +1,5 @@
+import { getUser } from "../../../frontend/breaking-news/src/utils/utils.js";
+import User from "../models/User.js";
 import { createNews, getNews, getNewsById, deleteNews, updateNews, countNews, topNewsService, searchNews, findPostsByUserId, likeNewService, dislikeNewService, commentService, deleteCommentService } from "../services/news.service.js";
 
 const getAll = async (req, res) => {
@@ -280,43 +282,49 @@ const commentNews = async (req, res) => {
         const userId = req.userId;
         const comment = req.body;
 
-        if(!comment) {
-            return res.status(400).send({ message: "Write a message to comment"})
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.status(400).send({ message: "Something went wrong" })
         }
 
-        const response = await commentService(id, userId, comment);
-
-        if(!response) {
-            return res.status(400).send({ message: "Something went wrong"})
+        if (!comment) {
+            return res.status(400).send({ message: "Write a message to comment" })
         }
 
-        res.status(200).send({ message: "Comment registered successfully!", news: response})
+        const response = await commentService(id, userId, comment, user.avatar, user.username);
+
+        if (!response) {
+            return res.status(400).send({ message: "Something went wrong" })
+        }
+
+        res.status(200).send({ message: "Comment registered successfully!", news: response })
     } catch (error) {
         res.status(500).send({ message: error.message })
     }
 }
 
-const deleteComment = async(req, res) => {
+const deleteComment = async (req, res) => {
     try {
         const { id, idComment } = req.params;
         const userId = req.userId;
 
         const news = await getNewsById(id);
 
-        if(!news) return res.status(400).send({ message: "Something went wrong, please try again"});
+        if (!news) return res.status(400).send({ message: "Something went wrong, please try again" });
 
         const commentFinder = news.comments.find((comment) => comment.idComment === idComment);
 
         console.log(commentFinder.userId);
         console.log(userId)
 
-        if(commentFinder.userId.toString() !== userId.toString()) {
-            return res.status(400).send({ message: "You can't delete this comment"});
+        if (commentFinder.userId.toString() !== userId.toString()) {
+            return res.status(400).send({ message: "You can't delete this comment" });
         }
 
         const response = await deleteCommentService(id, userId, idComment);
 
-        res.status(200).send({ message: "Comment deleted successfully!", news: response});
+        res.status(200).send({ message: "Comment deleted successfully!", news: response });
     } catch (error) {
         res.status(500).send({ message: error.message });
     }
