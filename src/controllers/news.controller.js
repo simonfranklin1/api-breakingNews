@@ -1,3 +1,4 @@
+import News from "../models/News.js";
 import User from "../models/User.js";
 import { createNews, getNews, getNewsById, deleteNews, updateNews, countNews, topNewsService, searchNews, findPostsByUserId, likeNewService, dislikeNewService, commentService, deleteCommentService } from "../services/news.service.js";
 
@@ -297,7 +298,9 @@ const commentNews = async (req, res) => {
             return res.status(400).send({ message: "Something went wrong" })
         }
 
-        res.status(200).send({ message: "Comment registered successfully!", news: response })
+        const updatedPost = await News.findById(id);
+
+        res.status(200).send({ message: "Comment registered successfully!", news: updatedPost })
     } catch (error) {
         res.status(500).send({ message: error.message })
     }
