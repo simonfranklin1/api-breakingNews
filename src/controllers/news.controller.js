@@ -1,4 +1,3 @@
-import { getUser } from "../../../frontend/breaking-news/src/utils/utils.js";
 import User from "../models/User.js";
 import { createNews, getNews, getNewsById, deleteNews, updateNews, countNews, topNewsService, searchNews, findPostsByUserId, likeNewService, dislikeNewService, commentService, deleteCommentService } from "../services/news.service.js";
 
